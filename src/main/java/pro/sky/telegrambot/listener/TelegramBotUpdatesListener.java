@@ -30,6 +30,11 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         updates.forEach(update -> {
             logger.info("Processing update: {}", update);
 
+            if (update.message() == null) {
+                logger.info("Null message was sent");
+                return;
+            }
+
             String messageReceived = update.message().text();
             long chatId = update.message().chat().id();
             String userName = update.message().chat().firstName();
